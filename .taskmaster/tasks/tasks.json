@@ -50,7 +50,7 @@
               1
             ],
             "details": "Create functions to generate new pieces with initial positions and properties, ensuring they appear correctly on the game board or screen.",
-            "status": "in-progress",
+            "status": "done",
             "testStrategy": "Test that pieces spawn at the correct locations and times without overlapping or errors."
           },
           {
@@ -61,7 +61,7 @@
               2
             ],
             "details": "Handle user input to move pieces, update their positions frame-by-frame, and enforce movement constraints such as boundaries and collisions.",
-            "status": "pending",
+            "status": "in-progress",
             "testStrategy": "Confirm pieces respond correctly to input and move smoothly without passing through obstacles or leaving the game area."
           },
           {
@@ -223,7 +223,7 @@
     ],
     "metadata": {
       "created": "2025-06-21T00:27:30.879Z",
-      "updated": "2025-06-21T03:02:06.156Z",
+      "updated": "2025-06-21T03:42:07.292Z",
       "description": "Tasks for master context"
     }
   }

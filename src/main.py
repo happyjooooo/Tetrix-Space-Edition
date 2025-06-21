@@ -6,6 +6,7 @@ from tetriminos import SHAPES, COLORS
 GRID_WIDTH = 10
 GRID_HEIGHT = 20
 BLOCK_SIZE = 30  # pixels
+DROP_INTERVAL = 500  # milliseconds
 
 class Piece:
     """Represents a Tetris piece."""
@@ -36,33 +37,55 @@ def draw_piece(ctx, piece):
                     BLOCK_SIZE
                 )
 
+def is_valid_position(piece):
+    """Checks if a piece is in a valid position."""
+    for r, row in enumerate(piece.shape):
+        for c, block in enumerate(row):
+            if block:
+                if not (0 <= piece.x + c < GRID_WIDTH and 0 <= piece.y + r < GRID_HEIGHT):
+                    return False
+    return True
+
 def main():
     """Main function to setup and run the game."""
-    # Get canvas and context
     canvas = document.getElementById("game-canvas")
     ctx = canvas.getContext("2d")
-
-    # Set canvas dimensions
     canvas.width = GRID_WIDTH * BLOCK_SIZE
     canvas.height = GRID_HEIGHT * BLOCK_SIZE
 
     # Game state
     current_piece = spawn_piece()
+    last_drop_time = 0
 
     def game_loop(timestamp):
-        """The main game loop, called for each animation frame."""
-        # Clear the canvas
+        nonlocal last_drop_time, current_piece
+        
+        # Automatic drop
+        if timestamp - last_drop_time > DROP_INTERVAL:
+            last_drop_time = timestamp
+            current_piece.y += 1
+            if not is_valid_position(current_piece):
+                current_piece.y -= 1
+                current_piece = spawn_piece() # For now, just spawn a new piece
+
+        # Drawing
         ctx.fillStyle = "#000"
         ctx.fillRect(0, 0, canvas.width, canvas.height)
-        
-        # Draw the current piece
         draw_piece(ctx, current_piece)
-
-        # Request the next frame
         window.requestAnimationFrame(game_loop)
 
-    # Start the game loop
+    def handle_keydown(event):
+        nonlocal current_piece
+        original_x = current_piece.x
+        if event.key == "ArrowLeft":
+            current_piece.x -= 1
+        elif event.key == "ArrowRight":
+            current_piece.x += 1
+        
+        if not is_valid_position(current_piece):
+            current_piece.x = original_x
+
+    document.addEventListener("keydown", handle_keydown)
     window.requestAnimationFrame(game_loop)
 
-# Run the main function
 main() 
