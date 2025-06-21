@@ -1,0 +1,176 @@
+{
+  "master": {
+    "tasks": [
+      {
+        "id": 1,
+        "title": "Setup Project Repository",
+        "description": "Create a new GitHub repository for Tetrix-Space Edition and initialize it with a basic directory structure.",
+        "details": "",
+        "testStrategy": "",
+        "priority": "medium",
+        "dependencies": [],
+        "status": "in-progress",
+        "subtasks": []
+      },
+      {
+        "id": 2,
+        "title": "Configure PyScript and Pyodide Environment",
+        "description": "Set up PyScript and Pyodide to enable Python execution in the browser.",
+        "details": "",
+        "testStrategy": "",
+        "priority": "medium",
+        "dependencies": [],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 3,
+        "title": "Implement Core Game Logic",
+        "description": "Develop the basic game logic using Python, including piece spawning and movement.",
+        "details": "",
+        "testStrategy": "",
+        "priority": "medium",
+        "dependencies": [],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 4,
+        "title": "Render Tetris Grid",
+        "description": "Use HTML5 Canvas to render the Tetris grid as a star-freighter cargo bay.",
+        "details": "",
+        "testStrategy": "",
+        "priority": "medium",
+        "dependencies": [],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 5,
+        "title": "Implement Piece Rotation and Collision Detection",
+        "description": "Add rotation and collision detection for tetrominoes.",
+        "details": "",
+        "testStrategy": "",
+        "priority": "medium",
+        "dependencies": [],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 6,
+        "title": "Develop Input Layer",
+        "description": "Implement keyboard and touch controls for piece movement and rotation.",
+        "details": "",
+        "testStrategy": "",
+        "priority": "medium",
+        "dependencies": [],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 7,
+        "title": "Implement Scoring and Level Logic",
+        "description": "Develop scoring system and level progression logic.",
+        "details": "",
+        "testStrategy": "",
+        "priority": "medium",
+        "dependencies": [],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 8,
+        "title": "Add Next Piece Preview and Hold Piece Features",
+        "description": "Implement next piece preview and hold piece functionality.",
+        "details": "",
+        "testStrategy": "",
+        "priority": "medium",
+        "dependencies": [],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 9,
+        "title": "Implement Pause and Resume Functionality",
+        "description": "Add pause and resume features with keyboard and on-screen controls.",
+        "details": "",
+        "testStrategy": "",
+        "priority": "medium",
+        "dependencies": [],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 10,
+        "title": "Integrate Local High-Score Storage",
+        "description": "Use localStorage to store and display top-10 high scores.",
+        "details": "",
+        "testStrategy": "",
+        "priority": "medium",
+        "dependencies": [],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 11,
+        "title": "Implement Service Worker for Offline Support",
+        "description": "Use Workbox to create a Service Worker that caches assets for offline play.",
+        "details": "",
+        "testStrategy": "",
+        "priority": "medium",
+        "dependencies": [],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 12,
+        "title": "Integrate Space-Themed Visuals and Audio",
+        "description": "Add neon space visuals, particle effects, and audio tracks.",
+        "details": "",
+        "testStrategy": "",
+        "priority": "medium",
+        "dependencies": [],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 13,
+        "title": "Implement Accessibility Features",
+        "description": "Add full keyboard support, high-contrast palette option, and scalable UI.",
+        "details": "",
+        "testStrategy": "",
+        "priority": "medium",
+        "dependencies": [],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 14,
+        "title": "Conduct Performance Optimization and Testing",
+        "description": "Optimize game performance to meet render loop and latency requirements.",
+        "details": "",
+        "testStrategy": "",
+        "priority": "medium",
+        "dependencies": [],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 15,
+        "title": "Deploy to GitHub Pages via GitHub Actions",
+        "description": "Set up CI/CD pipeline using GitHub Actions to deploy the game.",
+        "details": "",
+        "testStrategy": "",
+        "priority": "medium",
+        "dependencies": [],
+        "status": "pending",
+        "subtasks": []
+      }
+    ],
+    "metadata": {
+      "created": "2025-06-21T00:27:30.879Z",
+      "updated": "2025-06-21T00:39:14.673Z",
+      "description": "Tasks for master context"
+    }
+  }
+}

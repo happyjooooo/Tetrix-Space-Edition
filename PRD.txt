@@ -1,0 +1,126 @@
+Tetrix-Space Edition
+Product Requirements Document — Version 1.0 (Final)
+(Approved 21 Jun 2025)
+
+1 Product Overview
+Item	Description
+Working title	Tetrix-Space Edition
+Elevator pitch	A retro-inspired, space-themed falling-blocks puzzle that runs entirely in the browser, fully offline, written in Python (PyScript) with a smooth score-driven game loop and responsive controls. No ads, no sign-ups—just instant play.
+Target users	Casual gamers, students, nostalgic Tetris fans (ages 12-45) on desktop or mobile browsers.
+User value	• Fun, quick mental break in < 2 s load time.
+• Fresh sci-fi aesthetic differentiates it from vanilla clones.
+• Works without internet—great for travel or classrooms that restrict installs.
+Business model	Free; no monetisation in v1.0.
+
+2 Goals & Success Metrics
+Goal	Metric	Target
+Fast first play	Time from page request → first block visible	≤ 2 s (80-th percentile on 4 G laptop)
+Responsive gameplay	Input-to-action latency	≤ 100 ms
+Player mastery	Rows cleared in first session	Median ≥ 5
+Retention hint	Day-7 return rate (optional opt-in telemetry)	≥ 25 %
+Lightweight bundle	Download size after first visit (Service Worker cached)	≤ 2.0 MB gzipped
+
+3 Scope & Key Features
+ID	Feature	Detail
+F-1	Core board	10 × 20 grid rendered as star-freighter cargo bay; subtle animated starfield parallax.
+F-2	Seven tetrominoes	Re-skinned as neon “energy modules” with unique glow colours; rotation wall-kick compliant.
+F-3	Game controls	Keyboard (← → ↓ ↑ / W A S D), space=hard-drop, C=hold; touch overlay for mobile (drag/ tap).
+F-4	Score & level	Classic scoring + hard-drop bonus; level (sector) increases every 10 cleared rows, accelerating gravity.
+F-5	Next-piece preview	1-piece hologram panel.
+F-6	Hold piece	Toggleable; stored in Settings.
+F-7	Pause / resume	P key / on-screen button; dims background; freezes timers.
+F-8	Local high-score table	Top-10 stored in localStorage; displayed on title screen and Game Over.
+F-9	Audio	One looping chip-tune track + SFX; user must click/tap once to enable to satisfy autoplay policies.
+F-10	Accessibility baseline	• Full keyboard support • optional high-contrast palette • resizable canvas + scalable UI fonts.
+F-11	Offline support	Service Worker caches all assets on first load; subsequent loads are network-independent.
+
+Out-of-scope for v1.0: online leaderboards, multiplayer, ads/IAP, cloud save, analytics beyond optional opt-in telemetry.
+
+4 User Stories
+As a casual player I open the page and start playing within seconds, without installing anything.
+
+As a theme enthusiast I enjoy the neon space visuals and particle effects that feel different from standard Tetris.
+
+As a commuter with flaky internet I can play completely offline after the first visit.
+
+As a high-score chaser my best scores persist across browser restarts so I can challenge myself later.
+
+5 Functional Requirements
+ID	Requirement	Priority
+FR-1	Game logic implemented in Python ≥ 3.11 running via Pyodide 0.27 and PyScript 2.x entirely client-side.	P0
+FR-2	Render loop ≤ 16 ms per frame (60 FPS target) on mid-tier 2022 laptop; ≥ 45 FPS on modern phones.	P0
+FR-3	Service Worker must precache HTML, JS/WASM, CSS, assets; offline play verified by Lighthouse PWA audit.	P0
+FR-4	High-score and Settings persisted via localStorage; fail gracefully if storage unavailable.	P1
+FR-5	Controls remappable in Settings, stored persistently.	P2
+FR-6	All assets (code + art + audio) licensed CC0/MIT or created in-house to avoid IP issues.	P0
+
+6 Non-Functional Requirements
+Category	Specification
+Performance	≤ 5 MB RAM peak; GC pauses < 4 ms (90th pctl).
+Security	No external network calls after load; Content-Security-Policy blocks inline scripts.
+Compatibility	Chromium 97+, Firefox 102+, Safari 15+; graceful message for unsupported browsers.
+Quality	Unit test coverage ≥ 80 % for game logic; Playwright e2e test for start-to-game-over path.
+CI/CD	GitHub Actions → deploy to GitHub Pages (or Cloudflare Pages) on main branch push; automatic Lighthouse + pytest gates.
+
+7 Tech Stack & Architecture
+Layer	Choice
+Runtime	Pyodide (Python → WebAssembly) via PyScript
+Renderer	HTML5 Canvas 2D (no heavy WebGL dependency)
+Bridge	Minimal JS shim to transfer keyboard/touch events to Python, and frame buffer back to Canvas.
+Bundler	Rollup + @rollup/plugin-wasm for Pyodide packaging; final bundle gzip ≤ 2 MB.
+Offline	Workbox-generated Service Worker (cache-first strategy).
+Assets	Open-source sprite/sound pack (Kenney “Space Shooter Redux” + custom tweaks).
+
+8 UX & Visual Design Guidelines
+Colour palette Neon cyan #00eaff, magenta #ff3bff, solar yellow #ffd34d against deep-space navy #0a0e25.
+
+Grid 2 px translucent glow border per cell; cleared row explodes into star-dust particle burst that fades in 200 ms.
+
+Typography Pixel-bitmap for in-game HUD (score/level); “Orbitron” webfont for menus.
+
+Mobile layout Responsive flex column: canvas full-width top, control bar bottom with on-screen arrows, rotate, drop.
+
+Animations Starfield parallax (slow scroll); block drop ease-in-out; level-up flash (+0.2 s).
+
+Audio One 60-second looping track (8-bit synth, 120 BPM); separate WAV/OGG SFX for rotate, line clear, hard-drop, level-up.
+
+9 Milestones & Schedule
+Sprint (1 wk)	Deliverable	Owner
+1	Repo scaffold, PyScript bootstrap, Canvas board render	Eng
+2	Piece spawning, movement, rotation, collision, score calc	Eng
+3	Input layer (keyboard + touch), level logic, pause	Eng
+4	High-score storage, Settings panel, Service Worker offline	Eng
+5	Space art integration, audio, FX, accessibility polish	Eng + Design
+6	QA pass, perf tuning, Lighthouse PWA audit → v1.0 Launch	QA + PM
+
+Buffer: 1 week contingency for defect fixes or browser edge-case issues.
+
+10 Out-of-Scope & Future Ideas
+Online global leaderboards via WebSockets
+
+Versus or co-op multiplayer race mode
+
+Cosmetic skins & soundtrack packs (free DLC)
+
+Analytics dashboard (would require user opt-in + remote backend)
+
+11 Risks & Mitigations
+Risk	Likelihood	Impact	Mitigation
+Pyodide bundle (> 2 MB) increases first load on slow mobile	Med	Med	Compress w/ brotli; show progress bar; offline thereafter
+Autoplay restrictions mute music by default	High	Low	Require user click; surface audio toggle button
+Trademark conflict with “Tetris”	Low	High	Never use word “Tetris” in UI; custom block names; original logo
+Canvas perf on low-end phones	Med	Med	Offer “low-FX” mode (no particle shaders, lower FPS cap)
+
+12 Glossary
+Term	Meaning
+Tetromino	One of seven standard 4-block shapes used in falling-block games.
+Pyodide	Project that compiles CPython to WebAssembly for in-browser Python execution.
+PyScript	Framework that embeds Pyodide in HTML via custom <py-script> tags.
+Service Worker	Browser script that intercepts requests to enable offline caching.
+
+13 Approval
+Role	Name	Date	Signature
+Product Manager	—	21 Jun 2025	—
+Engineering Lead	—	21 Jun 2025	—
+Design Lead	—	21 Jun 2025	—
+
