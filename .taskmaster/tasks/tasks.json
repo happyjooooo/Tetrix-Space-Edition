@@ -39,7 +39,7 @@
             "description": "Initialize the game environment using Python and set up the main game loop to control gameplay flow.",
             "dependencies": [],
             "details": "Use a library like Pygame to initialize the game window, set up the display, and create a game loop that processes user input, updates game state, and refreshes the display each frame.\n<info added on 2025-06-21T01:57:32.162Z>\nAdd an HTML <canvas> element to index.html to serve as the game screen. In main.py, access this canvas and its 2D rendering context. Create a game_loop function that encapsulates the logic for updating game state and rendering game pieces. Replace the Pygame loop with window.requestAnimationFrame to repeatedly invoke game_loop, ensuring smooth, browser-synchronized animations.\n</info added on 2025-06-21T01:57:32.162Z>",
-            "status": "in-progress",
+            "status": "done",
             "testStrategy": "Verify the game window opens correctly and the loop runs continuously until a quit event is triggered."
           },
           {
@@ -50,7 +50,7 @@
               1
             ],
             "details": "Create functions to generate new pieces with initial positions and properties, ensuring they appear correctly on the game board or screen.",
-            "status": "pending",
+            "status": "in-progress",
             "testStrategy": "Test that pieces spawn at the correct locations and times without overlapping or errors."
           },
           {
@@ -223,7 +223,7 @@
     ],
     "metadata": {
       "created": "2025-06-21T00:27:30.879Z",
-      "updated": "2025-06-21T02:58:00.950Z",
+      "updated": "2025-06-21T03:02:06.156Z",
       "description": "Tasks for master context"
     }
   }
