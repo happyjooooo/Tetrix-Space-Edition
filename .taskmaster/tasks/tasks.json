@@ -20,7 +20,7 @@
         "testStrategy": "",
         "priority": "medium",
         "dependencies": [],
-        "status": "in-progress",
+        "status": "done",
         "subtasks": []
       },
       {
@@ -32,7 +32,61 @@
         "priority": "medium",
         "dependencies": [],
         "status": "pending",
-        "subtasks": []
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Set Up Game Environment and Loop",
+            "description": "Initialize the game environment using Python and set up the main game loop to control gameplay flow.",
+            "dependencies": [],
+            "details": "Use a library like Pygame to initialize the game window, set up the display, and create a game loop that processes user input, updates game state, and refreshes the display each frame.\n<info added on 2025-06-21T01:57:32.162Z>\nAdd an HTML <canvas> element to index.html to serve as the game screen. In main.py, access this canvas and its 2D rendering context. Create a game_loop function that encapsulates the logic for updating game state and rendering game pieces. Replace the Pygame loop with window.requestAnimationFrame to repeatedly invoke game_loop, ensuring smooth, browser-synchronized animations.\n</info added on 2025-06-21T01:57:32.162Z>",
+            "status": "in-progress",
+            "testStrategy": "Verify the game window opens correctly and the loop runs continuously until a quit event is triggered."
+          },
+          {
+            "id": 2,
+            "title": "Implement Piece Spawning Logic",
+            "description": "Develop the logic to spawn game pieces at appropriate locations and intervals within the game environment.",
+            "dependencies": [
+              1
+            ],
+            "details": "Create functions to generate new pieces with initial positions and properties, ensuring they appear correctly on the game board or screen.",
+            "status": "pending",
+            "testStrategy": "Test that pieces spawn at the correct locations and times without overlapping or errors."
+          },
+          {
+            "id": 3,
+            "title": "Develop Piece Movement Mechanics",
+            "description": "Implement the logic that allows pieces to move according to game rules and player input.",
+            "dependencies": [
+              2
+            ],
+            "details": "Handle user input to move pieces, update their positions frame-by-frame, and enforce movement constraints such as boundaries and collisions.",
+            "status": "pending",
+            "testStrategy": "Confirm pieces respond correctly to input and move smoothly without passing through obstacles or leaving the game area."
+          },
+          {
+            "id": 4,
+            "title": "Integrate Collision Detection and Response",
+            "description": "Add logic to detect collisions between pieces and other game elements and respond appropriately.",
+            "dependencies": [
+              3
+            ],
+            "details": "Implement collision detection algorithms to identify when pieces collide with obstacles or other pieces and define the resulting behavior (e.g., stopping movement, triggering events).",
+            "status": "pending",
+            "testStrategy": "Test collision scenarios to ensure accurate detection and correct game responses."
+          },
+          {
+            "id": 5,
+            "title": "Finalize Core Game Logic and Cleanup",
+            "description": "Complete the core game logic implementation and ensure proper cleanup and exit procedures.",
+            "dependencies": [
+              4
+            ],
+            "details": "Ensure the game loop can exit cleanly, resources are released properly, and the game state is maintained correctly throughout play.",
+            "status": "pending",
+            "testStrategy": "Verify the game closes without errors and all core logic functions as expected during gameplay."
+          }
+        ]
       },
       {
         "id": 4,
@@ -169,7 +223,7 @@
     ],
     "metadata": {
       "created": "2025-06-21T00:27:30.879Z",
-      "updated": "2025-06-21T01:03:07.619Z",
+      "updated": "2025-06-21T02:58:00.950Z",
       "description": "Tasks for master context"
     }
   }
