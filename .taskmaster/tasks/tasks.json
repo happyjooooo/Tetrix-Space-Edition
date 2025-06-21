@@ -72,7 +72,7 @@
               3
             ],
             "details": "Implement collision detection algorithms to identify when pieces collide with obstacles or other pieces and define the resulting behavior (e.g., stopping movement, triggering events).",
-            "status": "in-progress",
+            "status": "done",
             "testStrategy": "Test collision scenarios to ensure accurate detection and correct game responses."
           },
           {
@@ -83,7 +83,7 @@
               4
             ],
             "details": "Ensure the game loop can exit cleanly, resources are released properly, and the game state is maintained correctly throughout play.",
-            "status": "pending",
+            "status": "in-progress",
             "testStrategy": "Verify the game closes without errors and all core logic functions as expected during gameplay."
           }
         ]
@@ -223,7 +223,7 @@
     ],
     "metadata": {
       "created": "2025-06-21T00:27:30.879Z",
-      "updated": "2025-06-21T03:46:37.165Z",
+      "updated": "2025-06-21T03:47:55.601Z",
       "description": "Tasks for master context"
     }
   }

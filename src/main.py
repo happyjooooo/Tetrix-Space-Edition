@@ -67,6 +67,17 @@ def lock_piece(piece, grid):
             if block:
                 grid[piece.y + r][piece.x + c] = piece.color
 
+def clear_lines(grid):
+    """Checks for and clears completed lines."""
+    lines_to_clear = [i for i, row in enumerate(grid) if all(row)]
+    for i in lines_to_clear:
+        del grid[i]
+        grid.insert(0, [0 for _ in range(GRID_WIDTH)])
+
+def rotate_piece(piece):
+    """Rotates a piece."""
+    piece.shape = [list(row) for row in zip(*piece.shape[::-1])]
+
 def main():
     """Main function to setup and run the game."""
     canvas = document.getElementById("game-canvas")
@@ -89,6 +100,7 @@ def main():
             if not is_valid_position(current_piece, grid):
                 current_piece.y -= 1
                 lock_piece(current_piece, grid)
+                clear_lines(grid)
                 current_piece = spawn_piece()
 
         # Drawing
@@ -101,13 +113,18 @@ def main():
     def handle_keydown(event):
         nonlocal current_piece
         original_x = current_piece.x
+        original_shape = [row[:] for row in current_piece.shape]
+
         if event.key == "ArrowLeft":
             current_piece.x -= 1
         elif event.key == "ArrowRight":
             current_piece.x += 1
+        elif event.key == "ArrowUp":
+            rotate_piece(current_piece)
         
         if not is_valid_position(current_piece, grid):
             current_piece.x = original_x
+            current_piece.shape = original_shape
 
     document.addEventListener("keydown", handle_keydown)
     window.requestAnimationFrame(game_loop)
