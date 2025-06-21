@@ -17,6 +17,10 @@ class Piece:
         self.x = GRID_WIDTH // 2 - len(shape[0]) // 2
         self.y = 0
 
+def create_grid():
+    """Creates an empty grid."""
+    return [[0 for _ in range(GRID_WIDTH)] for _ in range(GRID_HEIGHT)]
+
 def spawn_piece():
     """Spawns a new random piece."""
     shape_name = random.choice(list(SHAPES.keys()))
@@ -37,14 +41,31 @@ def draw_piece(ctx, piece):
                     BLOCK_SIZE
                 )
 
-def is_valid_position(piece):
+def draw_grid(ctx, grid):
+    """Draws the grid of landed pieces."""
+    for r, row in enumerate(grid):
+        for c, color in enumerate(row):
+            if color:
+                ctx.fillStyle = color
+                ctx.fillRect(c * BLOCK_SIZE, r * BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE)
+
+def is_valid_position(piece, grid):
     """Checks if a piece is in a valid position."""
     for r, row in enumerate(piece.shape):
         for c, block in enumerate(row):
             if block:
-                if not (0 <= piece.x + c < GRID_WIDTH and 0 <= piece.y + r < GRID_HEIGHT):
+                new_x = piece.x + c
+                new_y = piece.y + r
+                if not (0 <= new_x < GRID_WIDTH and 0 <= new_y < GRID_HEIGHT and grid[new_y][new_x] == 0):
                     return False
     return True
+
+def lock_piece(piece, grid):
+    """Locks a piece into the grid."""
+    for r, row in enumerate(piece.shape):
+        for c, block in enumerate(row):
+            if block:
+                grid[piece.y + r][piece.x + c] = piece.color
 
 def main():
     """Main function to setup and run the game."""
@@ -54,6 +75,7 @@ def main():
     canvas.height = GRID_HEIGHT * BLOCK_SIZE
 
     # Game state
+    grid = create_grid()
     current_piece = spawn_piece()
     last_drop_time = 0
 
@@ -64,13 +86,15 @@ def main():
         if timestamp - last_drop_time > DROP_INTERVAL:
             last_drop_time = timestamp
             current_piece.y += 1
-            if not is_valid_position(current_piece):
+            if not is_valid_position(current_piece, grid):
                 current_piece.y -= 1
-                current_piece = spawn_piece() # For now, just spawn a new piece
+                lock_piece(current_piece, grid)
+                current_piece = spawn_piece()
 
         # Drawing
         ctx.fillStyle = "#000"
         ctx.fillRect(0, 0, canvas.width, canvas.height)
+        draw_grid(ctx, grid)
         draw_piece(ctx, current_piece)
         window.requestAnimationFrame(game_loop)
 
@@ -82,7 +106,7 @@ def main():
         elif event.key == "ArrowRight":
             current_piece.x += 1
         
-        if not is_valid_position(current_piece):
+        if not is_valid_position(current_piece, grid):
             current_piece.x = original_x
 
     document.addEventListener("keydown", handle_keydown)

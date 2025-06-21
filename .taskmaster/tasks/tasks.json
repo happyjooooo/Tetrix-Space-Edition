@@ -61,7 +61,7 @@
               2
             ],
             "details": "Handle user input to move pieces, update their positions frame-by-frame, and enforce movement constraints such as boundaries and collisions.",
-            "status": "in-progress",
+            "status": "done",
             "testStrategy": "Confirm pieces respond correctly to input and move smoothly without passing through obstacles or leaving the game area."
           },
           {
@@ -72,7 +72,7 @@
               3
             ],
             "details": "Implement collision detection algorithms to identify when pieces collide with obstacles or other pieces and define the resulting behavior (e.g., stopping movement, triggering events).",
-            "status": "pending",
+            "status": "in-progress",
             "testStrategy": "Test collision scenarios to ensure accurate detection and correct game responses."
           },
           {
@@ -223,7 +223,7 @@
     ],
     "metadata": {
       "created": "2025-06-21T00:27:30.879Z",
-      "updated": "2025-06-21T03:42:07.292Z",
+      "updated": "2025-06-21T03:46:37.165Z",
       "description": "Tasks for master context"
     }
   }
